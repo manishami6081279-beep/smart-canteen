@@ -1,0 +1,11 @@
+<div{% if not item.is_available %} class="sold-out"{% endif %}>
+    {% if item.image %}<img src="{{ item.image.url }}" width="170" height="160" alt="{{ item.name }}">{% endif %}
+    <h3>{{ item.name|upper }}</h3>
+    <p>price:₹{{ item.price|floatformat:"-2" }}</p>
+    {% if item.is_available %}
+    {% include "canteen/_qty_box.html" %}<br>
+    <button type="button" class="add-to-cart" data-item-id="{{ item.id }}">Add to cart</button>
+    {% else %}
+    <p class="sold-out-label">Currently unavailable</p>
+    {% endif %}
+</div>

@@ -1,0 +1,27 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beverages</title>
+    <link rel="stylesheet" href="{% static 'css/beverages1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+</head>
+<body>
+    {% include "canteen/_messages.html" %}
+    {% include "canteen/_userbar.html" %}
+    <h2>🧋BEVERAGES</h2>
+
+    <div style="display:flex;gap:80px">
+        {% for item in items %}{% include "canteen/_food_card.html" %}{% empty %}<p>No items available right now.</p>{% endfor %}
+    </div>
+<br><br>
+<div style="text-align:center;">
+    <form action="{% url 'place_order' %}" method="get">
+        <button>Place Order</button>
+    </form>
+</div>
+
+    {% include "canteen/_scripts.html" %}
+</body>
+</html>

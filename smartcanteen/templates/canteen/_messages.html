@@ -1,0 +1,10 @@
+{% if messages %}
+<div class="cn-messages">
+    {% for message in messages %}
+    <div class="cn-message {{ message.tags }}">
+        <span>{{ message }}</span>
+        <span class="cn-close" role="button" aria-label="Close">&times;</span>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

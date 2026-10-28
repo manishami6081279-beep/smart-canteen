@@ -1,0 +1,52 @@
+/* Small additions used by the Django version. Every rule is scoped to a
+   "cn-" class (or a new class) so the original page designs are not changed. */
+
+/* ---- flash messages (success / error / info) ---- */
+.cn-messages{
+    position:fixed; top:10px; left:50%; transform:translateX(-50%);
+    z-index:10000; width:min(92%,540px);
+}
+.cn-message{
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:10px 14px; margin-bottom:8px; border-radius:10px;
+    font:14px/1.4 Arial,sans-serif; text-align:left;
+    box-shadow:0 4px 12px rgba(0,0,0,.25); border:1px solid transparent;
+}
+.cn-message.success{background:#e6f6ea; color:#14532d; border-color:#86d19a;}
+.cn-message.error{background:#fdecea; color:#7f1d1d; border-color:#f1a7a0;}
+.cn-message.warning{background:#fff4d6; color:#7a4b00; border-color:#f0cf7a;}
+.cn-message.info{background:#e3f2fd; color:#0d3c61; border-color:#90caf9;}
+.cn-close{cursor:pointer; font-weight:bold; font-size:18px; line-height:1;}
+
+/* ---- little user bar (top-right corner) ---- */
+.cn-userbar{
+    position:fixed; top:8px; right:10px; z-index:9000;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    background:rgba(255,255,255,.88); color:#333;
+    padding:5px 12px; border-radius:20px; font:13px Arial,sans-serif;
+    box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.cn-userbar a, .cn-userbar .cn-linkbtn{
+    all:unset; cursor:pointer; color:#3556b3; font:13px Arial,sans-serif; font-weight:bold;
+}
+.cn-userbar a:hover, .cn-userbar .cn-linkbtn:hover{text-decoration:underline; transform:none;}
+
+/* ---- form errors ---- */
+.cn-error{
+    display:block; color:#c62828; font-size:13px; margin-top:4px;
+    font-family:Arial,sans-serif; font-weight:normal; text-align:left;
+}
+.cn-error-dark{color:#ff8a80;}   /* for the dark login box */
+.cn-note{font-size:14px; text-align:center; margin-top:14px; font-family:Arial,sans-serif;}
+.cn-note a{color:#3556b3; font-weight:bold;}
+
+/* ---- menu cards for unavailable food ---- */
+.sold-out{opacity:.55;}
+.sold-out .sold-out-label{color:#b71c1c !important; font-weight:bold;}
+
+/* ---- place-order page: remove button inside the table ---- */
+.card button.remove-btn{
+    flex:none; background:#e74c3c; color:#fff; padding:3px 9px; font-size:12px;
+    border-radius:12px;
+}
+.cn-empty{text-align:center; font-family:Arial,sans-serif;}

@@ -1,0 +1,111 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, lavender, lightgray, #e6ccff);
+}
+
+/* TITLE */
+h2, h4{
+    text-align: center;
+    color: #4b0082; /* violet */
+}
+
+/* FLEX CONTAINER */
+div[style*="display:flex"]{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+/* CARD BOX */
+div[style*="display:flex"] > div{
+    width: 230px;
+    padding: 15px;
+
+    background: white;
+    border-radius: 20px; /* CURVE */
+    border: 2px solid lavender;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+/* HOVER EFFECT (smooth + elegant) */
+div[style*="display:flex"] > div:hover{
+    transform: translateY(-10px);
+    border-color: violet;
+}
+
+/* DIFFERENT HOVER COLORS */
+div[style*="display:flex"] > div:nth-child(1):hover{
+    background: linear-gradient(135deg, violet, #ffb6f0);
+    color: white;
+}
+
+div[style*="display:flex"] > div:nth-child(2):hover{
+    background: linear-gradient(135deg, #e6ccff, #b39ddb);
+}
+
+div[style*="display:flex"] > div:nth-child(3):hover{
+    background: linear-gradient(135deg, #f8d7ff, #fff0f5);
+}
+
+div[style*="display:flex"] > div:nth-child(4):hover{
+    background: linear-gradient(135deg, #d1c4e9, #e6ccff);
+}
+
+/* IMAGE BOX (PHOTO SQUARE + SHADOW + CURVE) */
+img{
+    width: 160px;
+    height: 150px;
+
+    border-radius: 15px;
+    border: 3px solid lightgray;
+
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+
+    transition: 0.3s ease;
+}
+
+/* IMAGE HOVER */
+div[style*="display:flex"] > div:hover img{
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* BUTTON */
+button{
+    background: linear-gradient(45deg, violet, #d8b4fe);
+    color: white;
+
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* BUTTON HOVER */
+button:hover{
+    background: linear-gradient(45deg, #ffb6f0, violet);
+    transform: scale(1.08);
+}
+
+/* TEXT */
+p{
+    font-weight: bold;
+    color: #333;
+}
+input[type="number"]{
+    width: 20px;
+    height: 10px;
+    text-align: center;
+}

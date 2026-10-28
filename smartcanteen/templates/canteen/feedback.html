@@ -1,0 +1,84 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="{% static 'css/feedback1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+</head>
+<body>
+{% include "canteen/_messages.html" %}
+{% include "canteen/_userbar.html" %}
+
+<center>
+    <h1>SMART CANTEEN FEEDBACK</h1>
+</center>
+
+<form action="{% url 'feedback' %}" method="post">
+    {% csrf_token %}
+    <p>
+     <b>Name:</b><br>
+     <input type="text" name="name" placeholder="Enter your name" maxlength="100"
+            value="{{ form.name.value|default_if_none:'' }}" required>
+     {% for e in form.name.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+    </p>
+
+
+    <p>
+        <b>Token Number:</b><br>
+        <input type="number" name="token_number" placeholder="Enter token number" min="1"
+               value="{{ form.token_number.value|default_if_none:'' }}">
+        {% for e in form.token_number.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+    </p>
+
+
+    <p>
+    <b>Rate Our Service:</b><br>
+
+    <input type="radio" name="rating" id="excellent" value="excellent" {% if form.rating.value == 'excellent' %}checked{% endif %} required>
+    <label for="excellent">Excellent</label><br>
+
+    <input type="radio" name="rating" id="good" value="good" {% if form.rating.value == 'good' %}checked{% endif %}>
+    <label for="good">Good</label><br>
+
+    <input type="radio" name="rating" id="average" value="average" {% if form.rating.value == 'average' %}checked{% endif %}>
+    <label for="average">Average</label><br>
+
+    <input type="radio" name="rating" id="poor" value="poor" {% if form.rating.value == 'poor' %}checked{% endif %}>
+    <label for="poor">Poor</label>
+    {% for e in form.rating.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+</p>
+
+    <p>
+
+    <b>Food Quality:</b><br>
+
+    <input type="checkbox" name="taste" id="taste" {% if form.taste.value %}checked{% endif %}>
+    <label for="taste">Taste</label><br>
+
+    <input type="checkbox" name="quantity" id="quantity" {% if form.quantity.value %}checked{% endif %}>
+    <label for="quantity">Quantity</label><br>
+
+    <input type="checkbox" name="hygiene" id="hygiene" {% if form.hygiene.value %}checked{% endif %}>
+    <label for="hygiene">Hygiene</label>
+</p>
+
+    <p>
+        <b>😎Comments:</b><br>
+        <textarea rows="5" cols="30" name="comments" placeholder="Write your feedback">{{ form.comments.value|default_if_none:'' }}</textarea>
+    </p>
+
+    <input type="submit" value="Submit Feedback">
+
+</form>
+
+<hr>
+
+<center>
+    <p>Thank You For Your Feedback 😊</p>
+</center>
+
+{% include "canteen/_scripts.html" %}
+</body>
+</html>

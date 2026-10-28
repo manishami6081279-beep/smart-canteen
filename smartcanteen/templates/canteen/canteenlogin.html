@@ -1,0 +1,39 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Login</title>
+    <link rel="stylesheet" href="{% static 'css/canteenlogin1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+</head>
+<body>
+    {% include "canteen/_messages.html" %}
+    {% include "canteen/_userbar.html" %}
+
+    <center>
+        <h2>CANTEEN LOGIN FORM</h2>
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <label for="uid_number">UID Number:</label><br>
+            <input type="text" id="uid_number" name="uid_number" maxlength="20" autocomplete="username" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" autocomplete="current-password" required><br><br>
+
+            <button type="submit">Login</button>
+            <button type="reset">Clear</button>
+
+        </form>
+
+        <br>
+        <a href="{% url 'register' %}" style="color:skyblue;font-family:Arial,sans-serif;">New student? Register here</a>
+
+    </center>
+
+    {% include "canteen/_scripts.html" %}
+</body>
+</html>

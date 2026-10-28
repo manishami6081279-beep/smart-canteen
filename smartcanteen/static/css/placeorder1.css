@@ -1,0 +1,110 @@
+body{
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+.card{
+    width: 420px;
+    background: linear-gradient(rgb(100, 235, 168),rgb(141, 221, 253),white) ;
+    padding: 25px;
+    border-radius: 18px;
+    border-top: 6px solid rgb(166, 233, 199);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 15px;
+    color: #2628a3;
+}
+
+h3{
+    margin-top: 15px;
+    color: #444;
+}
+
+label{
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+input, select{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+th{
+    background: #f2f2f2;
+    padding: 8px;
+}
+
+td{
+    text-align: center;
+    padding: 6px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.radio-group{
+    margin-top: 8px;
+    display: flex;
+    gap: 10px;
+}
+
+
+.btns{
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+button{
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+button[type="submit"]{
+    background: linear-gradient(90deg, #ff4fa3, #7b61ff, #4fc3f7);
+}
+
+
+button[type="reset"]{
+    background: #e74c3c;
+}
+
+button{
+    transition: all 0.3s ease;
+}
+
+
+input:focus, select:focus, textarea:focus{
+    border: 2px solid #007bff;
+    box-shadow: 0 0 8px rgba(0,123,255,0.5);
+}
+
+input[type="radio"]:checked {
+  background: green;
+  border-color: green;
+}

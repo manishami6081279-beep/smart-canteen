@@ -1,0 +1,90 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOOD MENU</title>
+    <link rel="stylesheet" href="{% static 'css/menu1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+</head>
+<body>
+    {% include "canteen/_messages.html" %}
+    {% include "canteen/_userbar.html" %}
+    <hr>
+    <style>
+      h1{
+         text-align: center;
+      }
+    </style>
+    <h1>FOOD MENU</h1>
+
+    {% if q %}
+    <p style="text-align:center;">Search results for "<b>{{ q }}</b>" &mdash; <a href="{% url 'menu' %}">show full menu</a></p>
+    {% endif %}
+    {% if nothing_found %}
+    <p style="text-align:center;">Sorry, no food item matches your search.</p>
+    {% endif %}
+
+    {% if breakfast %}
+    <h2>🥗BREAKFAST</h2>
+
+    <div style="display:flex;gap:80px">
+        {% for item in breakfast %}{% include "canteen/_food_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if lunch_veg or lunch_nonveg %}
+    <h2>🍲LUNCH</h2>
+    {% endif %}
+
+    {% if lunch_veg %}
+    <h4>🍱VEG</h4>
+
+    <div style="display:flex;gap:80px">
+        {% for item in lunch_veg %}{% include "canteen/_food_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if lunch_nonveg %}
+    <h4>🍗NON VEG</h4>
+
+    <div style="display:flex;gap:80px">
+        {% for item in lunch_nonveg %}{% include "canteen/_food_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if snacks %}
+    <h2>🍪SNACKS</h2>
+
+    <div style="display:flex;gap:80px">
+        {% for item in snacks %}{% include "canteen/_food_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if beverages %}
+    <h2>🧋BEVERAGES</h2>
+
+    <div style="display:flex;gap:80px">
+        {% for item in beverages %}{% include "canteen/_food_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if desserts %}
+    <h2>🍰DESSERTS</h2>
+
+    <div style="display:flex;gap:80px">
+        {% for item in desserts %}{% include "canteen/_food_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+
+   <br><br>
+
+   <div style="text-align:center;">
+    <form action="{% url 'place_order' %}" method="get">
+        <button>Place Order</button>
+    </form>
+</div>
+
+    {% include "canteen/_scripts.html" %}
+</body>
+</html>

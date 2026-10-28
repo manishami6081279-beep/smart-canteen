@@ -1,0 +1,13 @@
+<div class="cn-userbar">
+    <a href="{% url 'home' %}">🏠 Home</a>
+    {% if user.is_authenticated %}
+        <span>👤 {{ user.first_name|default:user.username }}</span>
+        <a href="{% url 'place_order' %}">🛒 Cart (<span id="cn-cart-count">{{ cart_count }}</span>)</a>
+        {# The logout form is hidden; the button below submits it (keeps page CSS from styling a <form>) #}
+        <form id="cn-logout-form" method="post" action="{% url 'logout' %}" style="display:none">{% csrf_token %}</form>
+        <button type="submit" form="cn-logout-form" class="cn-linkbtn">Logout</button>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+</div>

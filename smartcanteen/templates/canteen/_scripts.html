@@ -1,0 +1,9 @@
+{% load static %}
+<script>
+    window.CANTEEN = {
+        csrfToken: "{{ csrf_token }}",
+        addUrl: "{% url 'add_to_cart' %}",
+        loginUrl: "{% url 'login' %}"
+    };
+</script>
+<script src="{% static 'js/canteen.js' %}"></script>

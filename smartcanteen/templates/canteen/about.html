@@ -1,0 +1,34 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Smart Canteen</title>
+    <link rel="stylesheet" href="{% static 'css/about1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+    <style>
+        h2{
+            text-align: center;
+        }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    {% include "canteen/_messages.html" %}
+    {% include "canteen/_userbar.html" %}
+
+    <h2>SMART CANTEEN PREORDER</h2>
+
+    <center>
+        <img src="{% static 'images/smartfood.png' %}" width="450" height="450" alt="Smart Canteen">
+    </center>
+
+    <p>Order your favourite food online and collect it quickly without waiting.</p>
+
+    <p>Our smart canteen system helps students to pre-order food easily </p>
+
+    {% include "canteen/_scripts.html" %}
+</body>
+</html>

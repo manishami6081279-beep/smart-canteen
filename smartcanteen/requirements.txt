@@ -1,0 +1,7 @@
+Django>=5.2,<5.3
+mysqlclient>=2.2
+Pillow>=10.0
+python-dotenv>=1.0
+# If mysqlclient will not install on your computer (common on Windows), delete the
+# mysqlclient line above and use this pure-Python driver instead:
+# PyMySQL>=1.1

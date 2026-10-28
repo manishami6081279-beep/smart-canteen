@@ -1,0 +1,99 @@
+{% load static %}<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canteen Pre Order</title>
+<link rel="stylesheet" href="{% static 'css/placeorder1.css' %}">
+<link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+</head>
+
+<body>
+{% include "canteen/_messages.html" %}
+{% include "canteen/_userbar.html" %}
+
+<div class="card">
+
+    <form action="{% url 'place_order' %}" method="post">
+    {% csrf_token %}
+
+<h2>Canteen Pre Order Form</h2>
+
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" placeholder="Enter Name" maxlength="100"
+       value="{{ form.name.value|default_if_none:'' }}" required>
+{% for e in form.name.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+
+<label for="department">Department:</label>
+<select id="department" name="department">
+    {% for value, label in form.fields.department.choices %}
+    <option value="{{ value }}" {% if form.department.value == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+</select>
+{% for e in form.department.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+
+<label for="pickup_time">Pick Up Time:</label>
+<input type="time" id="pickup_time" name="pickup_time" min="08:00" max="17:00"
+       value="{{ form.pickup_time.value|default_if_none:'' }}" required>
+{% for e in form.pickup_time.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+
+<label for="pickup_date">Date:</label>
+<input type="date" id="pickup_date" name="pickup_date" min="{{ today }}"
+       value="{{ form.pickup_date.value|default_if_none:'' }}" required>
+{% for e in form.pickup_date.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+
+<h3>Order Details</h3>
+
+<table>
+<tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Rate</th>
+    <th>Amount</th>
+    <th></th>
+</tr>
+
+{% for ci in cart_items %}
+<tr>
+    <td>{{ ci.food.name }}</td>
+    <td>{{ ci.quantity }}</td>
+    <td>₹{{ ci.food.price|floatformat:"-2" }}</td>
+    <td>₹{{ ci.subtotal|floatformat:"-2" }}</td>
+    <td><button type="submit" form="remove-{{ ci.pk }}" class="remove-btn" title="Remove from cart">✖</button></td>
+</tr>
+{% endfor %}
+
+<tr>
+    <td colspan="3"><b>Grand Total</b></td>
+    <td><b>₹{{ total|floatformat:"-2" }}</b></td>
+    <td></td>
+</tr>
+
+</table>
+
+<label>Payment Method:</label>
+<div class="radio-group">
+{% for value, label in form.fields.payment_method.choices %}
+<input type="radio" name="payment_method" value="{{ value }}" {% if form.payment_method.value == value %}checked{% endif %} {% if forloop.first %}required{% endif %}> {{ label }}
+{% endfor %}
+</div>
+{% for e in form.payment_method.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+
+<div class="btns">
+<button type="submit">Order Confirm</button>
+<button type="reset">Cancel Order</button>
+</div>
+
+<p class="cn-note"><a href="{% url 'menu' %}">+ Add more items</a></p>
+
+</form>
+
+{# One tiny hidden form per cart row, so pressing Enter in the order form can never remove an item #}
+{% for ci in cart_items %}
+<form id="remove-{{ ci.pk }}" method="post" action="{% url 'remove_from_cart' ci.pk %}" style="display:none">{% csrf_token %}</form>
+{% endfor %}
+</div>
+
+{% include "canteen/_scripts.html" %}
+</body>
+</html>

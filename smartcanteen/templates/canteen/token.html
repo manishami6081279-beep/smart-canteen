@@ -1,0 +1,39 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="{% static 'css/token1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+</head>
+<body>
+    {% include "canteen/_messages.html" %}
+    {% include "canteen/_userbar.html" %}
+<center>
+
+<h1>✅ Order Placed Successfully!</h1>
+
+<h2>Your Token Number</h2>
+
+<h1 id="token">🎫 {{ order.token_label }}</h1>
+
+<p>Please show this token while collecting your food.</p>
+
+<p>
+    Pick up: <b>{{ order.pickup_date|date:"d M Y" }}, {{ order.pickup_time|time:"h:i A" }}</b><br>
+    Total: <b>₹{{ order.total_amount|floatformat:"-2" }}</b> ({{ order.payment_method }})<br>
+    Status: <b>{{ order.get_status_display }}</b>
+</p>
+
+<h3>Thank You!</h3>
+
+<a href="{% url 'feedback' %}?token={{ order.token_number }}">
+    <button>Give the feedback</button>
+</a>
+
+</center>
+
+{% include "canteen/_scripts.html" %}
+</body>
+</html>

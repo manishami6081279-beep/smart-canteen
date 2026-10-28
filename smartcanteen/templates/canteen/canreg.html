@@ -1,0 +1,71 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="{% static 'css/canreg1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+    <style>
+        h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    {% include "canteen/_messages.html" %}
+    {% include "canteen/_userbar.html" %}
+
+    <h2>REGISTRATION FORM</h2>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" maxlength="100"
+               value="{{ form.name.value|default_if_none:'' }}" required>
+        {% for e in form.name.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}<br><br>
+
+        <label for="uid_number">UID NUM:</label>
+        <input type="text" id="uid_number" name="uid_number" placeholder="Enter your UID" maxlength="20"
+               value="{{ form.uid_number.value|default_if_none:'' }}" required>
+        {% for e in form.uid_number.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}<br><br>
+
+        <label for="mobile">Mobile</label>
+        <input type="tel" id="mobile" name="mobile" placeholder="Enter your Mobile number" maxlength="10"
+               pattern="[6-9][0-9]{9}" title="10-digit mobile number starting with 6, 7, 8 or 9"
+               value="{{ form.mobile.value|default_if_none:'' }}" required>
+        {% for e in form.mobile.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}<br><br>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" placeholder="Enter your Year" min="1" max="4"
+               value="{{ form.year.value|default_if_none:'' }}" required>
+        {% for e in form.year.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}<br><br>
+
+        <label>DEPT:</label>
+        <div class="dept">
+            {% for value, label in form.fields.department.choices %}
+            <input type="radio" id="dept-{{ forloop.counter }}" name="department" value="{{ value }}"
+                   {% if form.department.value == value %}checked{% endif %} {% if forloop.first %}required{% endif %}>
+            <label for="dept-{{ forloop.counter }}">{{ label }}</label>{% if forloop.counter|divisibleby:2 %}<br><br>{% endif %}
+            {% endfor %}
+        </div>
+        {% for e in form.department.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}<br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Choose a password (min 6 characters)"
+               autocomplete="new-password" required>
+        {% for e in form.password.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}<br><br>
+
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password"
+               autocomplete="new-password" required>
+        {% for e in form.confirm_password.errors %}<span class="cn-error">{{ e }}</span>{% endfor %}
+
+        <input type="submit" value="submit">
+
+        <p class="cn-note">Already registered? <a href="{% url 'login' %}">Login here</a></p>
+    </form>
+
+    {% include "canteen/_scripts.html" %}
+</body>
+</html>

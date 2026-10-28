@@ -1,0 +1,107 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Canteen Preorder System</title>
+    <link rel="stylesheet" href="{% static 'css/homepage1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/canteen.css' %}">
+    <style>
+        h2 {
+            color: white;
+            font-size: 50px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        .hero {
+            text-align: center;
+            padding: 150px;
+            background-image: url('{% static "images/idly.png" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    {% include "canteen/_messages.html" %}
+
+    <center>
+        <section class="hero">
+            <h2> SMART CANTEEN PREORDER SYSTEM </h2><br>
+            <form action="{% url 'menu' %}" method="get" style="display:inline">
+                <label>Search</label>
+                <input type="text" name="q" placeholder="search">
+            </form>
+        </section>
+    </center>
+
+    <nav>
+        <button>
+            <a href="{% url 'home' %}">HOME</a>
+        </button>
+        <button>
+            <a href="{% url 'menu' %}">MENU</a>
+        </button>
+
+        <button>
+            <a href="{% url 'todays_special' %}">TODAYS SPECIAL</a>
+        </button>
+
+        <button>
+            <a href="{% url 'place_order' %}">PLACE ORDER</a>
+        </button>
+
+        <button>
+            <a href="{% url 'token' %}">TOKEN</a>
+        </button>
+
+        <button>
+            <a href="{% url 'feedback' %}">FEEDBACK</a>
+        </button>
+
+        {% if user.is_authenticated %}
+        <form id="cn-logout-form" method="post" action="{% url 'logout' %}" style="display:none">{% csrf_token %}</form>
+        <button type="submit" form="cn-logout-form">LOGOUT ({{ user.first_name|default:user.username }})</button>
+        {% else %}
+        <button>
+            <a href="{% url 'register' %}">REGISTRATION</a>
+        </button>
+
+        <button>
+            <a href="{% url 'login' %}">LOGIN</a>
+        </button>
+        {% endif %}
+
+        <button>
+            <a href="{% url 'contact' %}">CONTACT</a>
+        </button>
+
+        <button>
+            <a href="{% url 'about' %}">ABOUT</a>
+        </button>
+    </nav><br><br>
+
+    <center>
+        <h2>POPULAR ITEMS</h2>
+
+        <div style="display:flex;justify-content:center;gap:30px">
+            {% for item in popular_items %}
+            <div>
+                {% if item.image %}<img src="{{ item.image.url }}" width="100" height="100" alt="{{ item.name }}">{% endif %}
+                <p>{{ item.name }}-{{ item.price|floatformat:"-2" }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </center>
+
+    <h3 align="right"> Categories</h3>
+    <nav align="right">
+        <a href="{% url 'breakfast' %}">BREAKFAST</a><br><br>
+        <a href="{% url 'lunch' %}">LUNCH</a><br><br>
+        <a href="{% url 'snacks' %}">SNACKS</a><br><br>
+        <a href="{% url 'beverages' %}">BEVERAGES</a><br><br>
+        <a href="{% url 'desserts' %}">DESSERTS</a><br><br>
+    </nav>
+
+    {% include "canteen/_scripts.html" %}
+</body>
+</html>
